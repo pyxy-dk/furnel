@@ -5,6 +5,7 @@ simple tool to pre-compress files for a static website.
 
 [![Continuous Integration workflow status badge][badge-ci-svg]][badge-ci-href]
 [![Security Audit workflow status badge][badge-audit-svg]][badge-audit-href]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Why “Furnel”?
 
