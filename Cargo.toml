@@ -27,3 +27,16 @@ publish = false
 brotli = "3.3.3"
 clap = { version = "3.0.10", features = ["derive"] }
 glob = "0.3.0"
+
+[package.metadata.deb]
+features = []
+section = "utils"
+assets = [
+  ["target/release/furnel", "usr/bin/", "755"],
+#  ["CHANGELOG.md", "usr/share/doc/furnel/NEWS", "644"],
+  ["README.md", "usr/share/doc/furnel/README", "644"],
+#  ["doc/furnel.1", "usr/share/man/man1/furnel.1", "644"],
+]
+extended-description = """\
+furnel is a command-line utility to compress files using the brotli algorithm.
+"""
