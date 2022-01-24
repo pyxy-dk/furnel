@@ -1,0 +1,28 @@
+[package]
+name = "furnel"
+version = "0.1.0"
+authors = ["Kristian Thy <k@pyxy.dk>"]
+edition = "2021"
+description = "A command-line utility to compress files using the brotli algorithm"
+repository = "https://github.com/pyxy-dk/furnel"
+license = "MIT"
+keywords = [
+    "br",
+    "brotli",
+    "compression",
+    "web",
+    "webpack",
+]
+categories = [
+    "command-line-utilities",
+    "compression",
+    "development-tools::build-utils",
+    "encoding",
+    "filesystem",
+]
+publish = false
+
+[dependencies]
+brotli = "3.3.3"
+clap = { version = "3.0.10", features = ["derive"] }
+glob = "0.3.0"
