@@ -55,6 +55,8 @@ Download and run the [`rustup-init.exe`][rustup] installer.
 ### Build, Test and Run
 
 ```bash
+git clone https://github.com/pyxy-dk/furnel.git
+cd furnel
 cargo build
 cargo test
 cargo run -- -r
