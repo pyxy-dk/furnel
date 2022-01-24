@@ -1,0 +1,129 @@
+name: Release
+
+on:
+  push:
+    tags: [ v*.*.* ]
+
+jobs:
+  security_audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions-rs/audit-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    name: Test
+    runs-on: ${{ matrix.job.os }}
+    strategy:
+      matrix:
+        job:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+          - target: x86_64-apple-darwin
+            os: macos-latest
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            rustflags: -C target-feature=+crt-static
+          - target: x86_64-unknown-linux-musl
+            os: ubuntu-latest
+            use-cross: true
+          - target: x86_64-unknown-freebsd
+            os: ubuntu-latest
+            use-cross: true
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: 1.51.1 # minimum supported rust version
+          target: ${{ matrix.job.target }}
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          use-cross: ${{ matrix.job.use-cross }}
+          command: test
+          args: --target ${{ matrix.job.target }} ${{ matrix.job.flags }}
+
+  deploy:
+    name: Deploy
+    needs: [ security_audit, test ]
+    runs-on: ${{ matrix.job.os }}
+    strategy:
+      matrix:
+        job:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: macos-latest
+            target: x86_64-apple-darwin
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            use-cross: true
+          - os: ubuntu-latest
+            target: x86_64-unknown-freebsd
+            use-cross: true
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set RUSTFLAGS env variable
+        if: matrix.job.rustflags
+        shell: bash
+        run: echo "RUSTFLAGS=${{ matrix.job.rustflags }}" >> $GITHUB_ENV
+
+      - name: Build target
+        uses: actions-rs/cargo@v1
+        with:
+          use-cross: ${{ matrix.job.use-cross }}
+          command: build
+          args: --release --target ${{ matrix.job.target }} ${{ matrix.job.flags }}
+
+      - name: Strip release binary
+        if: matrix.job.os != 'windows-latest'
+        run: |
+          strip "target/${{ matrix.job.target }}/release/furnel"
+
+      - id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Package
+        shell: bash
+        run: |
+          if [ "${{ matrix.job.os }}" = "windows-latest" ]; then
+            bin="target/${{ matrix.job.target }}/release/furnel.exe"
+          else
+            bin="target/${{ matrix.job.target }}/release/furnel"
+          fi
+          staging="furnel-${{ steps.get_version.outputs.version }}-${{ matrix.job.target }}"
+
+          mkdir -p "$staging"/{doc,completions}
+          cp LICENSE.md README.md $bin $staging
+          # cp CHANGELOG.md doc/furnel.1 "$staging"/doc
+          # cp completions/* "$staging"/completions
+
+          if [ "${{ matrix.job.os }}" = "windows-latest" ]; then
+            7z a "$staging.zip" $staging
+          elif [ "${{ matrix.job.os }}" = "macos-latest" ]; then
+            gtar czvf "$staging.tar.gz" $staging
+          else
+            tar czvf "$staging.tar.gz" $staging
+          fi
+
+      - name: Package (debian)
+        if: matrix.job.target == 'x86_64-unknown-linux-musl'
+        shell: bash
+        run: |
+          cargo install cargo-deb
+          cargo deb --no-build --target ${{ matrix.job.target }}
+          cp "target/${{ matrix.job.target }}/debian"/*.deb ./
+
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+            files: 'furnel*'
+            draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
