@@ -99,10 +99,9 @@ jobs:
           fi
           staging="furnel-${{ steps.get_version.outputs.version }}-${{ matrix.job.target }}"
 
-          mkdir -p "$staging"/{doc,completions}
+          mkdir -p "$staging"/doc
           cp LICENSE.md README.md $bin $staging
           # cp CHANGELOG.md doc/furnel.1 "$staging"/doc
-          # cp completions/* "$staging"/completions
 
           if [ "${{ matrix.job.os }}" = "windows-latest" ]; then
             7z a "$staging.zip" $staging
