@@ -3,6 +3,7 @@ name = "furnel"
 version = "0.1.0"
 authors = ["Kristian Thy <k@pyxy.dk>"]
 edition = "2021"
+rust-version = "1.56.1"
 description = "A command-line utility to compress files using the brotli algorithm"
 repository = "https://github.com/pyxy-dk/furnel"
 license = "MIT"
