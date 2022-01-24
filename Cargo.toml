@@ -33,7 +33,7 @@ features = []
 section = "utils"
 assets = [
   ["target/release/furnel", "usr/bin/", "755"],
-#  ["CHANGELOG.md", "usr/share/doc/furnel/NEWS", "644"],
+  ["CHANGELOG.md", "usr/share/doc/furnel/NEWS", "644"],
   ["README.md", "usr/share/doc/furnel/README", "644"],
 #  ["doc/furnel.1", "usr/share/man/man1/furnel.1", "644"],
 ]
