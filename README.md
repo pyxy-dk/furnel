@@ -4,6 +4,7 @@ A command-line utility to compress files using the [brotli] algorithm. Built bec
 simple tool to pre-compress files for a static website.
 
 [![Crates.io][badge-crates-svg]][badge-crates-href]
+[![Deps.rs][badge-depsrs-svg]][badge-depsrs-href]
 [![Continuous Integration workflow status badge][badge-ci-svg]][badge-ci-href]
 [![Security Audit workflow status badge][badge-audit-svg]][badge-audit-href]
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -89,6 +90,8 @@ cargo run -- -h
 [badge-ci-svg]: https://github.com/pyxy-dk/furnel/actions/workflows/ci.yml/badge.svg
 [badge-crates-href]: https://crates.io/crates/furnel
 [badge-crates-svg]: https://img.shields.io/crates/v/furnel.svg
+[badge-depsrs-href]: https://deps.rs/crate/furnel
+[badge-depsrs-svg]: https://deps.rs/repo/github/pyxy-dk/furnel/status.svg
 [brotli]: https://en.wikipedia.org/wiki/Brotli
 [og-image-url]: https://repository-images.githubusercontent.com/451275347/f342ccad-8e6c-4815-be3e-2375f970694b
 [releases]: https://github.com/pyxy-dk/furnel/releases
