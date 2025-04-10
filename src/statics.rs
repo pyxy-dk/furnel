@@ -1,7 +1,7 @@
 //! Static definitions for Furnel.
 
 /*************************************************************************************************
- * Copyright © 2022 Kristian Thy (<k@pyxy.dk>) and released under the MIT license.               *
+ * Copyright © 2022-2025 Kristian Thy (<thy@42.dk>) and released under the MIT license.          *
  * This file is part of Furnel: <https://github.com/pyxy-dk/furnel>                              *
  *************************************************************************************************/
 
@@ -11,8 +11,8 @@ pub static ABOUT: &str = "A CLI tool that compresses files using the brotli algo
 /// Clap after-help text.
 pub static AFTER_HELP: &str = "LEGAL NOTICE:
     This Software is released under the MIT License (SPDX: \"MIT\") and is
-    copyright © 2022 Kristian Thy <k@pyxy.dk>. It includes code from the
-    following projects:
+    copyright © 2022-2025 Kristian Thy <thy@42.dk>. It includes code from
+    the following projects:
 
     * `clap`, copyright © 2015-2016 Kevin B. Knapp
     * `glob`, copyright © 2014 The Rust Project Developers
@@ -56,7 +56,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 -------------------------------------------------------------------
 
-GLOB, Copyright © 2014 The Rust Project Developers
+FURNEL, Copyright © 2022-2025 Kristian Thy
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -81,7 +81,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 -------------------------------------------------------------------
 
-FURNEL, Copyright © 2022 Kristian Thy
+GLOB, Copyright © 2014 The Rust Project Developers
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

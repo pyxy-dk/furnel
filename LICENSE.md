@@ -1,6 +1,6 @@
 # Furnel
 
-Copyright © 2022 `Kristian Thy <k@pyxy.dk>`
+Copyright © 2022-2025 `Kristian Thy <thy@42.dk>`
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

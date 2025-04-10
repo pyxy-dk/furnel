@@ -1,7 +1,7 @@
 //! A command-line utility to compress files using the brotli algorithm.
 
 /*************************************************************************************************
- * Copyright © 2022 Kristian Thy (<k@pyxy.dk>) and released under the MIT license.               *
+ * Copyright © 2022-2025 Kristian Thy (<thy@42.dk>) and released under the MIT license.          *
  * This file is part of Furnel: <https://github.com/pyxy-dk/furnel>                              *
  *************************************************************************************************/
 
