@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+…
+
+## [0.1.1] - 2025-04-10
+
+* Updated dependencies and copyright notices.
+
 ### Added
 
 * Release archives now contain `CHANGELOG.md`.
@@ -22,5 +28,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Initial public release of **furnel**.
 
 [Unreleased]: https://github.com/pyxy-dk/furnel/compare/v0.1.0...HEAD
-[0.2.0]: https://github.com/pyxy-dk/furnel/compare/v0.1.0...v0.2.0
+[0.1.1]: https://github.com/pyxy-dk/furnel/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/pyxy-dk/furnel/releases/tag/v0.1.0
