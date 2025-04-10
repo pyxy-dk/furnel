@@ -3,10 +3,11 @@ name: Security Audit
 on:
   push:
     paths:
-      - '**/Cargo.toml'
-      - '**/Cargo.lock'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '42 7 * * 6'  # Every Saturday at 07:42 UTC
+  workflow_dispatch:
 
 jobs:
   security_audit:
