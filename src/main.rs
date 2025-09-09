@@ -27,7 +27,7 @@ pub struct Args {
     #[clap(default_value = ".", required_unless_present = "license")]
     pub base_path: String,
     /// File extensions to process, for example `-x css -x html -x js`
-    #[clap(short = 'x', long = "extension", value_name = "EXTENSION", default_values_t = vec!["css".to_string(), "html".to_string(), "js".to_string(), "svg".to_string(), "txt".to_string()])]
+    #[clap(short = 'x', long = "extension", value_name = "EXTENSION")]
     pub extensions: Vec<String>,
     /// Display full license notice
     #[clap(short, long)]
@@ -45,7 +45,18 @@ pub struct Args {
 
 fn main() {
     // Load command line arguments
-    let args = Args::parse();
+    let mut args = Args::parse();
+
+    // Set default extensions if none provided
+    if args.extensions.is_empty() {
+        args.extensions = vec![
+            "css".to_string(),
+            "html".to_string(),
+            "js".to_string(),
+            "svg".to_string(),
+            "txt".to_string(),
+        ];
+    }
 
     // Short circuit for license display
     if args.license {
