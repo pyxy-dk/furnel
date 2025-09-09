@@ -69,10 +69,30 @@ OPTIONS:
 
 Furnel is written in Rust, so you will need a Rust installation to compile it.
 
-### Installing Rust on Windows
+### Using GitHub Codespaces or Dev Containers
 
+The easiest way to get started is using the provided dev container configuration:
+
+1. **GitHub Codespaces**: Click the "Code" button and select "Create codespace on main"
+2. **VS Code Dev Containers**: Open the project in VS Code and select "Reopen in Container" when prompted
+3. **Other editors**: Use any editor that supports dev containers with the `.devcontainer/devcontainer.json` configuration
+
+The dev container includes:
+- Latest Rust toolchain
+- Rust Analyzer for IDE support
+- Clippy for linting
+- All necessary VS Code extensions pre-configured
+
+### Installing Rust Locally
+
+#### On Windows
 Download and run the [`rustup-init.exe`][rustup] installer. As part of the installation process,
 it will instruct you to install the Microsoft Visual C++ Build Tools 2019 and provide a link.
+
+#### On macOS/Linux
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 ### Build, Test and Run
 
