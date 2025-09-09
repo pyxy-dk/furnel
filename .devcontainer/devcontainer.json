@@ -27,7 +27,5 @@
 		}
 	},
 
-	"postCreateCommand": "rustc --version && cargo --version",
-	
-	"remoteUser": "vscode"
+	"postCreateCommand": "rustc --version && cargo --version"
 }
