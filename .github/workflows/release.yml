@@ -4,9 +4,17 @@ on:
   push:
     tags: [ v*.*.* ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions: {}
+
 jobs:
   test:
     name: Test
+    permissions:
+      contents: read
     runs-on: ${{ matrix.job.os }}
     strategy:
       matrix:
@@ -22,20 +30,32 @@ jobs:
             use-cross: true
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1
         with:
-          profile: minimal
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
+        with:
           toolchain: 1.56.1 # minimum supported rust version
-          target: ${{ matrix.job.target }}
-          override: true
-      - uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1
-        with:
-          use-cross: ${{ matrix.job.use-cross }}
-          command: test
-          args: --target ${{ matrix.job.target }} ${{ matrix.job.flags }}
+          targets: ${{ matrix.job.target }}
+      - name: Install cross
+        if: matrix.job.use-cross
+        run: cargo install cross
+      - name: Test
+        shell: bash
+        env:
+          TARGET: ${{ matrix.job.target }}
+          USE_CROSS: ${{ matrix.job.use-cross }}
+          FLAGS: ${{ matrix.job.flags }}
+        run: |
+          if [ "$USE_CROSS" = "true" ]; then
+            cross test --target "$TARGET" $FLAGS
+          else
+            cargo test --target "$TARGET" $FLAGS
+          fi
 
   deploy:
     name: Push
+    permissions:
+      contents: write # needed to upload release assets
     needs: [ test ]
     runs-on: ${{ matrix.job.os }}
     strategy:
@@ -53,42 +73,67 @@ jobs:
             use-cross: true
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Set RUSTFLAGS env variable
         if: matrix.job.rustflags
         shell: bash
-        run: echo "RUSTFLAGS=${{ matrix.job.rustflags }}" >> $GITHUB_ENV
+        env:
+          RUSTFLAGS_VALUE: ${{ matrix.job.rustflags }}
+        run: echo "RUSTFLAGS=$RUSTFLAGS_VALUE" >> $GITHUB_ENV
+
+      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
+        with:
+          toolchain: stable
+          targets: ${{ matrix.job.target }}
+
+      - name: Install cross
+        if: matrix.job.use-cross
+        run: cargo install cross
 
       - name: Build target
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1
-        with:
-          use-cross: ${{ matrix.job.use-cross }}
-          command: build
-          args: --release --target ${{ matrix.job.target }} ${{ matrix.job.flags }}
+        shell: bash
+        env:
+          TARGET: ${{ matrix.job.target }}
+          USE_CROSS: ${{ matrix.job.use-cross }}
+          FLAGS: ${{ matrix.job.flags }}
+        run: |
+          if [ "$USE_CROSS" = "true" ]; then
+            cross build --release --target "$TARGET" $FLAGS
+          else
+            cargo build --release --target "$TARGET" $FLAGS
+          fi
 
       - name: Strip release binary
         if: matrix.job.os != 'windows-latest'
+        env:
+          TARGET: ${{ matrix.job.target }}
         run: |
-          strip "target/${{ matrix.job.target }}/release/furnel"
+          strip "target/$TARGET/release/furnel"
 
       - id: get_version
         uses: battila7/get-version-action@d97fbc34ceb64d1f5d95f4dfd6dce33521ccccf5 # v2
 
       - name: Package
         shell: bash
+        env:
+          JOB_OS: ${{ matrix.job.os }}
+          JOB_TARGET: ${{ matrix.job.target }}
+          VERSION: ${{ steps.get_version.outputs.version }}
         run: |
-          if [ "${{ matrix.job.os }}" = "windows-latest" ]; then
-            bin="target/${{ matrix.job.target }}/release/furnel.exe"
+          if [ "$JOB_OS" = "windows-latest" ]; then
+            bin="target/$JOB_TARGET/release/furnel.exe"
           else
-            bin="target/${{ matrix.job.target }}/release/furnel"
+            bin="target/$JOB_TARGET/release/furnel"
           fi
-          staging="furnel-${{ steps.get_version.outputs.version }}-${{ matrix.job.target }}"
+          staging="furnel-$VERSION-$JOB_TARGET"
 
           cp CHANGELOG.md LICENSE.md README.md $bin $staging
 
-          if [ "${{ matrix.job.os }}" = "windows-latest" ]; then
+          if [ "$JOB_OS" = "windows-latest" ]; then
             7z a "$staging.zip" $staging
-          elif [ "${{ matrix.job.os }}" = "macos-latest" ]; then
+          elif [ "$JOB_OS" = "macos-latest" ]; then
             gtar czvf "$staging.tar.gz" $staging
           else
             tar czvf "$staging.tar.gz" $staging
@@ -97,10 +142,12 @@ jobs:
       - name: Package (debian)
         if: matrix.job.target == 'x86_64-unknown-linux-musl'
         shell: bash
+        env:
+          JOB_TARGET: ${{ matrix.job.target }}
         run: |
           cargo install cargo-deb
-          cargo deb --no-build --target ${{ matrix.job.target }}
-          cp "target/${{ matrix.job.target }}/debian"/*.deb ./
+          cargo deb --no-build --target "$JOB_TARGET"
+          cp "target/$JOB_TARGET/debian"/*.deb ./
 
       - name: Publish
         uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2
