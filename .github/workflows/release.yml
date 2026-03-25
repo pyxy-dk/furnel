@@ -21,14 +21,14 @@ jobs:
             os: ubuntu-latest
             use-cross: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1
         with:
           profile: minimal
           toolchain: 1.56.1 # minimum supported rust version
           target: ${{ matrix.job.target }}
           override: true
-      - uses: actions-rs/cargo@v1
+      - uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1
         with:
           use-cross: ${{ matrix.job.use-cross }}
           command: test
@@ -52,7 +52,7 @@ jobs:
             target: x86_64-unknown-linux-musl
             use-cross: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Set RUSTFLAGS env variable
         if: matrix.job.rustflags
@@ -60,7 +60,7 @@ jobs:
         run: echo "RUSTFLAGS=${{ matrix.job.rustflags }}" >> $GITHUB_ENV
 
       - name: Build target
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1
         with:
           use-cross: ${{ matrix.job.use-cross }}
           command: build
@@ -72,7 +72,7 @@ jobs:
           strip "target/${{ matrix.job.target }}/release/furnel"
 
       - id: get_version
-        uses: battila7/get-version-action@v2
+        uses: battila7/get-version-action@d97fbc34ceb64d1f5d95f4dfd6dce33521ccccf5 # v2
 
       - name: Package
         shell: bash
@@ -103,7 +103,7 @@ jobs:
           cp "target/${{ matrix.job.target }}/debian"/*.deb ./
 
       - name: Publish
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2
         with:
             files: 'furnel*'
             draft: true
