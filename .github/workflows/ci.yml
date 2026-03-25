@@ -25,9 +25,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
-        with:
-          toolchain: stable
+      - run: rustup toolchain install stable --profile minimal
       - run: cargo check
 
   test:
@@ -40,9 +38,9 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
-        with:
-          toolchain: ${{ matrix.rust }}
+      - env:
+          TOOLCHAIN: ${{ matrix.rust }}
+        run: rustup toolchain install "$TOOLCHAIN" --profile minimal && rustup default "$TOOLCHAIN"
       - run: cargo test
 
   rustfmt:
@@ -52,10 +50,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
-        with:
-          toolchain: stable
-          components: rustfmt
+      - run: rustup toolchain install stable --profile minimal --component rustfmt
       - run: cargo fmt --all -- --check
 
   clippy:
@@ -68,8 +63,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
-        with:
-          toolchain: ${{ matrix.rust }}
-          components: clippy
+      - env:
+          TOOLCHAIN: ${{ matrix.rust }}
+        run: rustup toolchain install "$TOOLCHAIN" --profile minimal --component clippy && rustup default "$TOOLCHAIN"
       - run: cargo clippy -- -D warnings

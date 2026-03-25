@@ -32,10 +32,9 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
-        with:
-          toolchain: 1.56.1 # minimum supported rust version
-          targets: ${{ matrix.job.target }}
+      - env:
+          TARGET: ${{ matrix.job.target }}
+        run: rustup toolchain install 1.56.1 --profile minimal --target "$TARGET" && rustup default 1.56.1
       - name: Install cross
         if: matrix.job.use-cross
         run: cargo install cross
@@ -83,10 +82,9 @@ jobs:
           RUSTFLAGS_VALUE: ${{ matrix.job.rustflags }}
         run: echo "RUSTFLAGS=$RUSTFLAGS_VALUE" >> $GITHUB_ENV
 
-      - uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
-        with:
-          toolchain: stable
-          targets: ${{ matrix.job.target }}
+      - env:
+          TARGET: ${{ matrix.job.target }}
+        run: rustup toolchain install stable --profile minimal --target "$TARGET"
 
       - name: Install cross
         if: matrix.job.use-cross
@@ -150,9 +148,9 @@ jobs:
           cp "target/$JOB_TARGET/debian"/*.deb ./
 
       - name: Publish
-        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2
-        with:
-            files: 'furnel*'
-            draft: true
+        shell: bash
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG" --draft --generate-notes furnel* || gh release upload "$TAG" furnel* --clobber
