@@ -24,10 +24,15 @@ mod statics;
 #[clap(about = ABOUT, after_help = AFTER_HELP, term_width = 80, version)]
 pub struct Args {
     /// The base path to search
-    #[clap(default_value = ".", required_unless_present = "license")]
+    #[clap(default_value = ".")]
     pub base_path: String,
     /// File extensions to process, for example `-x css -x html -x js`
-    #[clap(short = 'x', long = "extension", value_name = "EXTENSION")]
+    #[clap(
+        short = 'x',
+        long = "extension",
+        value_name = "EXTENSION",
+        default_values = ["css", "html", "js", "svg", "txt"]
+    )]
     pub extensions: Vec<String>,
     /// Display full license notice
     #[clap(short, long)]
@@ -45,18 +50,7 @@ pub struct Args {
 
 fn main() {
     // Load command line arguments
-    let mut args = Args::parse();
-
-    // Set default extensions if none provided
-    if args.extensions.is_empty() {
-        args.extensions = vec![
-            "css".to_string(),
-            "html".to_string(),
-            "js".to_string(),
-            "svg".to_string(),
-            "txt".to_string(),
-        ];
-    }
+    let args = Args::parse();
 
     // Short circuit for license display
     if args.license {
@@ -184,5 +178,15 @@ mod tests {
         expected = "tests/files/**/*.";
         actual = glob_pattern(".\\tests\\files\\", true);
         assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn test_defaults() {
+        let mut args = Args::try_parse_from(["furnel"]).unwrap();
+        assert_eq!(args.base_path, ".");
+        assert_eq!(args.extensions, ["css", "html", "js", "svg", "txt"]);
+
+        args = Args::try_parse_from(["furnel", "-x", "json", "-x", "xml"]).unwrap();
+        assert_eq!(args.extensions, ["json", "xml"]);
     }
 }

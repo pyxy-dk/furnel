@@ -37,35 +37,19 @@ cargo install furnel
 ## Usage
 
 ```text
-USAGE:
-    furnel [OPTIONS] [--] [BASE_PATH]
+Usage: furnel [OPTIONS] [BASE_PATH]
 
-ARGS:
-    <BASE_PATH>    The base path to search [default: .]
+Arguments:
+  [BASE_PATH]  The base path to search [default: .]
 
-OPTIONS:
-    -h, --help
-            Print help information
-
-    -l, --license
-            Display full license notice
-
-    -m, --only-missing
-            Only compress missing files, i.e. those where no corresponding .br
-            files are present
-
-    -q, --quiet
-            Disable progress indicator
-
-    -r, --recurse
-            Recurse into subdirs below the base path
-
-    -V, --version
-            Print version information
-
-    -x, --extension <EXTENSION>
-            File extensions to process, for example `-x css -x html -x js`
-            [default: css html js svg txt]
+Options:
+  -x, --extension <EXTENSION>  File extensions to process, for example `-x css -x html -x js` [default: css html js svg txt]
+  -l, --license                Display full license notice
+  -m, --only-missing           Only compress missing files, i.e. those where no corresponding .br files are present
+  -q, --quiet                  Disable progress indicator
+  -r, --recurse                Recurse into subdirs below the base path
+  -h, --help                   Print help
+  -V, --version                Print version
 ```
 
 ## Building

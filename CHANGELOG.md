@@ -23,6 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated dependencies: `brotli` 7.0.0 → 9.0.0, `clap` 4.5.47 → 4.6.7, `glob` 0.3.3 → 0.3.4.
 * CI: GitHub Actions pinned to SHA refs, Dependabot and zizmor analysis added.
 
+### Fixed
+
+* `BASE_PATH` is now optional and defaults to `.` as documented; running `furnel` with no arguments no longer errors.
+* `--help` shows the default extensions again.
+* Usage section in `README.md` now matches `--help`.
+* Release workflow now builds and uploads archives for all targets.
+
 ## [0.1.2] - 2025-09-09
 
 ### Fixed
