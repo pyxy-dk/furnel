@@ -55,11 +55,24 @@ jobs:
             cargo test --target "$TARGET" $FLAGS
           fi
 
+  release:
+    name: Create draft release
+    permissions:
+      contents: write # needed to create the release
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" --draft --verify-tag --generate-notes
+
   deploy:
     name: Push
     permissions:
       contents: write # needed to upload release assets
-    needs: [ test ]
+    needs: [ release ]
     runs-on: ${{ matrix.job.os }}
     strategy:
       matrix:
@@ -131,6 +144,7 @@ jobs:
           fi
           staging="furnel-$VERSION-$JOB_TARGET"
 
+          mkdir "$staging"
           cp CHANGELOG.md LICENSE.md README.md $bin $staging
 
           if [ "$JOB_OS" = "windows-latest" ]; then
@@ -157,4 +171,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ github.ref_name }}
         run: |
-          gh release create "$TAG" --draft --generate-notes furnel* || gh release upload "$TAG" furnel* --clobber
+          shopt -s nullglob
+          gh release upload "$TAG" furnel-*.tar.gz furnel-*.zip furnel*.deb --clobber
