@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.3] - 2026-10-07
 
+### Added
+
+* `-V`/`--version` flag.
+
 ### Changed
 
 * Minimum supported Rust version raised from 1.56.1 to 1.85, as required by current `clap` and `brotli`.

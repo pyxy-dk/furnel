@@ -21,7 +21,7 @@ mod statics;
 
 /// Command-line options.
 #[derive(Debug, Parser)]
-#[clap(about = ABOUT, after_help = AFTER_HELP, term_width = 80)]
+#[clap(about = ABOUT, after_help = AFTER_HELP, term_width = 80, version)]
 pub struct Args {
     /// The base path to search
     #[clap(default_value = ".", required_unless_present = "license")]

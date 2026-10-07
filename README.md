@@ -60,6 +60,9 @@ OPTIONS:
     -r, --recurse
             Recurse into subdirs below the base path
 
+    -V, --version
+            Print version information
+
     -x, --extension <EXTENSION>
             File extensions to process, for example `-x css -x html -x js`
             [default: css html js svg txt]
