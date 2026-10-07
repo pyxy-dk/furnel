@@ -127,6 +127,15 @@ jobs:
         run: |
           strip "target/$TARGET/release/furnel"
 
+      - name: Generate man page
+        if: matrix.job.os == 'ubuntu-latest'
+        env:
+          TARGET: ${{ matrix.job.target }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends help2man
+          doc/mkman.sh "target/$TARGET/release/furnel"
+
       - id: get_version
         uses: battila7/get-version-action@d97fbc34ceb64d1f5d95f4dfd6dce33521ccccf5 # v2
 
@@ -146,6 +155,10 @@ jobs:
 
           mkdir "$staging"
           cp CHANGELOG.md LICENSE.md README.md $bin $staging
+          if [ -f doc/furnel.1 ]; then
+            mkdir "$staging"/doc
+            cp doc/furnel.1 "$staging"/doc
+          fi
 
           if [ "$JOB_OS" = "windows-latest" ]; then
             7z a "$staging.zip" $staging
