@@ -86,22 +86,22 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ### Build, Test and Run
 
 ```text
-git clone https://github.com/pyxy-dk/furnel.git
+git clone https://github.com/kthy/furnel.git
 cd furnel
 cargo build
 cargo test
 cargo run -- -h
 ```
 
-[badge-audit-href]: https://github.com/pyxy-dk/furnel/actions/workflows/audit.yml
-[badge-audit-svg]: https://github.com/pyxy-dk/furnel/actions/workflows/audit.yml/badge.svg
-[badge-ci-href]: https://github.com/pyxy-dk/furnel/actions/workflows/ci.yml
-[badge-ci-svg]: https://github.com/pyxy-dk/furnel/actions/workflows/ci.yml/badge.svg
+[badge-audit-href]: https://github.com/kthy/furnel/actions/workflows/audit-dep.yml
+[badge-audit-svg]: https://github.com/kthy/furnel/actions/workflows/audit-dep.yml/badge.svg
+[badge-ci-href]: https://github.com/kthy/furnel/actions/workflows/ci.yml
+[badge-ci-svg]: https://github.com/kthy/furnel/actions/workflows/ci.yml/badge.svg
 [badge-crates-href]: https://crates.io/crates/furnel
 [badge-crates-svg]: https://img.shields.io/crates/v/furnel.svg
 [badge-depsrs-href]: https://deps.rs/crate/furnel
-[badge-depsrs-svg]: https://deps.rs/repo/github/pyxy-dk/furnel/status.svg
+[badge-depsrs-svg]: https://deps.rs/repo/github/kthy/furnel/status.svg
 [brotli]: https://en.wikipedia.org/wiki/Brotli
 [og-image-url]: https://repository-images.githubusercontent.com/451275347/f342ccad-8e6c-4815-be3e-2375f970694b
-[releases]: https://github.com/pyxy-dk/furnel/releases
+[releases]: https://github.com/kthy/furnel/releases
 [rustup]: https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe

@@ -2,7 +2,7 @@
 
 /*************************************************************************************************
  * Copyright © 2022-2025 Kristian Thy (<thy@42.dk>) and released under the MIT license.          *
- * This file is part of Furnel: <https://github.com/pyxy-dk/furnel>                              *
+ * This file is part of Furnel: <https://github.com/kthy/furnel>                                 *
  *************************************************************************************************/
 
 use std::env;

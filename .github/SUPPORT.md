@@ -14,7 +14,7 @@ help you, please remember the following:
 * Before reaching out for support, please apply [rubber duck debugging][rdd] to your problem.
 
 [CoC]: CODE_OF_CONDUCT.md
-[issue]: https://github.com/pyxy-dk/furnel/issues
+[issue]: https://github.com/kthy/furnel/issues
 [ossfaq]: https://opensource.org/faq
 [rdd]: https://rubberduckdebugging.com/
 [support@pyxy.dk]: mailto:support@pyxy.dk

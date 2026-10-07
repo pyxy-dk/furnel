@@ -6,7 +6,7 @@ edition = "2021"
 rust-version = "1.85"
 description = "A command-line utility to compress files using the brotli algorithm"
 readme = "README.md"
-repository = "https://github.com/pyxy-dk/furnel"
+repository = "https://github.com/kthy/furnel"
 license = "MIT"
 keywords = [
     "br",

@@ -2,7 +2,7 @@
 
 /*************************************************************************************************
  * Copyright © 2022-2025 Kristian Thy (<thy@42.dk>) and released under the MIT license.          *
- * This file is part of Furnel: <https://github.com/pyxy-dk/furnel>                              *
+ * This file is part of Furnel: <https://github.com/kthy/furnel>                                 *
  *************************************************************************************************/
 
 /// Clap about text.
@@ -19,7 +19,7 @@ pub static AFTER_HELP: &str = "LEGAL NOTICE:
     * `rust-brotli`, copyright © 2016 Dropbox, Inc.
 
     You may obtain a copy of the Software's corresponding source code from
-    <https://github.com/pyxy-dk/furnel>. To read the full license notices,
+    <https://github.com/kthy/furnel>. To read the full license notices,
     run the Software with the `--license` flag.
 ";
 
