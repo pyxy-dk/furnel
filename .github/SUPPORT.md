@@ -5,7 +5,7 @@ Hi! :wave:
 > Please also see the [Code of Conduct][CoC] for this project.
 
 I am happy that **Furnel** is of interest to you, and I'd love to help you. If you have questions
-please [open an issue][issue] here on GitHub or shoot an email at [support@pyxy.dk]. To help me
+please [open an issue][issue] here on GitHub or shoot an email at [support@geologik.dk]. To help me
 help you, please remember the following:
 
 * **Furnel** is an [open source][ossfaq] project provided to you for free. You are not *entitled*
@@ -17,4 +17,4 @@ help you, please remember the following:
 [issue]: https://github.com/kthy/furnel/issues
 [ossfaq]: https://opensource.org/faq
 [rdd]: https://rubberduckdebugging.com/
-[support@pyxy.dk]: mailto:support@pyxy.dk
+[support@geologik.dk]: mailto:support@geologik.dk

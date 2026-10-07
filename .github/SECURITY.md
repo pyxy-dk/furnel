@@ -15,7 +15,7 @@ I appreciate your efforts and responsible disclosure and will make every
 effort to acknowledge your contributions.
 
 :warning:
-**Report security issues by emailing [bugs@pyxy.dk](mailto:bugs@pyxy.dk).**
+**Report security issues by emailing [bugs@geologik.dk](mailto:bugs@geologik.dk).**
 :warning:
 
 I will acknowledge your email within 48 hours, and will send a more

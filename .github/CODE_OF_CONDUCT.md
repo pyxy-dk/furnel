@@ -82,7 +82,7 @@ on complaints regarding:
 
 If you are being harassed by a member of **Furnel**,
 notice that someone else is being harassed, or have any other
-concerns, please contact the [BDFL] at [bdfl@pyxy.dk]. If the person
+concerns, please contact the [BDFL] at [bdfl@geologik.dk]. If the person
 who is harassing you is on the team, they will recuse themselves from
 handling your incident. We will respond as promptly as we can.
 
@@ -117,7 +117,7 @@ Feminism community.
 
 :peace_symbol:
 
-[BDFL]: https://pyxy.dk/about
-[bdfl@pyxy.dk]: mailto:bdfl@pyxy.dk
+[BDFL]: https://github.com/kthy
+[bdfl@geologik.dk]: mailto:bdfl@geologik.dk
 [CC0]: https://creativecommons.org/share-your-work/public-domain/cc0/
 [gfwiki]: https://geekfeminism.wikia.org/wiki/Community_anti-harassment/Policy
