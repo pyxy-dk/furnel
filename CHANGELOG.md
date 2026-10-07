@@ -9,9 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+…
+
+## [0.1.4] - 2026-10-07
+
 ### Changed
 
 * Releases are published to crates.io automatically via trusted publishing when a GitHub release is published.
+* Repository moved to <https://github.com/kthy/furnel>.
+* Contact addresses moved from the defunct `pyxy.dk` domain to `geologik.dk`.
 
 ### Fixed
 
@@ -58,7 +64,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release of **furnel**.
 
-[Unreleased]: https://github.com/kthy/furnel/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/kthy/furnel/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/kthy/furnel/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/kthy/furnel/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kthy/furnel/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kthy/furnel/compare/v0.1.0...v0.1.1
