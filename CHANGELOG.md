@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-…
+### Changed
+
+* Releases are published to crates.io automatically via trusted publishing when a GitHub release is published.
+
+### Fixed
+
+* `--help` output is wrapped at 80 columns as intended.
 
 ## [0.1.3] - 2026-10-07
 
