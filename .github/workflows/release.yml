@@ -37,7 +37,7 @@ jobs:
         run: rustup toolchain install 1.85 --profile minimal --target "$TARGET" && rustup default 1.85
       - name: Install cross
         if: matrix.job.use-cross
-        run: cargo install cross
+        run: cargo install cross --locked
       - name: Test
         shell: bash
         env:
@@ -88,7 +88,7 @@ jobs:
 
       - name: Install cross
         if: matrix.job.use-cross
-        run: cargo install cross
+        run: cargo install cross --locked
 
       - name: Build target
         shell: bash
