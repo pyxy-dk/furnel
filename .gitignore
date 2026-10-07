@@ -1,3 +1,4 @@
 .vscode/
 *.br
 /target
+/doc/furnel.1

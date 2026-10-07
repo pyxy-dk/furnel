@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-…
+### Added
+
+* Man page in the `.deb` package and the Linux release archives.
 
 ## [0.1.4] - 2026-10-07
 

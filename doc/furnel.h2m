@@ -1,0 +1,18 @@
+Extra material for the help2man-generated man page, see mkman.sh.
+
+[DESCRIPTION]
+.B furnel
+compresses files in BASE_PATH (and, with
+.BR \-r ,
+its subdirectories) using the brotli algorithm, writing a
+.I .br
+file next to each input file.
+
+[AUTHOR]
+Written by Kristian Thy.
+
+[REPORTING BUGS]
+Report bugs at <https://github.com/kthy/furnel/issues>.
+
+[SEE ALSO]
+.BR brotli (1)

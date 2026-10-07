@@ -93,6 +93,17 @@ cargo test
 cargo run -- -h
 ```
 
+### Debian Package
+
+The `.deb` package includes a man page generated from the `--help` output with [help2man]. To
+build the package locally you need `help2man` and [`cargo-deb`][cargo-deb]:
+
+```text
+cargo build --release
+doc/mkman.sh
+cargo deb --no-build
+```
+
 [badge-audit-href]: https://github.com/kthy/furnel/actions/workflows/audit-dep.yml
 [badge-audit-svg]: https://github.com/kthy/furnel/actions/workflows/audit-dep.yml/badge.svg
 [badge-ci-href]: https://github.com/kthy/furnel/actions/workflows/ci.yml
@@ -102,6 +113,8 @@ cargo run -- -h
 [badge-depsrs-href]: https://deps.rs/crate/furnel
 [badge-depsrs-svg]: https://deps.rs/repo/github/kthy/furnel/status.svg
 [brotli]: https://en.wikipedia.org/wiki/Brotli
+[cargo-deb]: https://github.com/kornelski/cargo-deb
+[help2man]: https://www.gnu.org/software/help2man/
 [og-image-url]: https://repository-images.githubusercontent.com/451275347/f342ccad-8e6c-4815-be3e-2375f970694b
 [releases]: https://github.com/kthy/furnel/releases
 [rustup]: https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe
