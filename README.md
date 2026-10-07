@@ -43,9 +43,11 @@ Arguments:
   [BASE_PATH]  The base path to search [default: .]
 
 Options:
-  -x, --extension <EXTENSION>  File extensions to process, for example `-x css -x html -x js` [default: css html js svg txt]
+  -x, --extension <EXTENSION>  File extensions to process, for example `-x css
+                               -x html -x js` [default: css html js svg txt]
   -l, --license                Display full license notice
-  -m, --only-missing           Only compress missing files, i.e. those where no corresponding .br files are present
+  -m, --only-missing           Only compress missing files, i.e. those where no
+                               corresponding .br files are present
   -q, --quiet                  Disable progress indicator
   -r, --recurse                Recurse into subdirs below the base path
   -h, --help                   Print help
